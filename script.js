@@ -26,9 +26,8 @@ function bob(){
 
         switch(talkID){
             case 0: //itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
-            const whatBobSays = GLOBAL; {
-                
-            }
+            let whatBobSays = ; 
+            console.log(whatBobSays);
             break;
 
             case 1: //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
