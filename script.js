@@ -32,13 +32,14 @@ function bob(){
             break;
 
             case 1: //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
-            let whatBobSays1 = LOCAL_BOB;
+            let whatBobSays1 = LOCAL_BOB;// for文の外のスコープで代入をすると要件を満たします
             setDialog(whatBobSays1,talkID);
             break;
 
             case 2: //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
-            let whatBobSays2 =GLOBAL;
+            let whatBobSays2 =GLOBAL;//スコープの範囲を1階層飛び越えて取得する方法を使います
             setDialog(whatBobSays2,talkID);
+            console.log();
             break;
 
             case 3://関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
@@ -50,7 +51,7 @@ function bob(){
             break;
 
             case 4: //関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
-            let whatBobSays4 =LOCAL_FOR;
+            let whatBobSays4 =LOCAL_FOR;// 代入も、thisも何も使わずに取得できるwhatBobSaysの値を見てみましょう
             setDialog(whatBobSays4,talkID);
             break;
 
