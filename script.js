@@ -9,7 +9,7 @@ const LOCAL_OBJ = "オブジェクトで設定したオブジェクトメソッ�
 //吹き出しの番号を指定するID
 let talkID = 0;
 //グローバル変数(定数)
-const whatBobSays = GLOBAL;
+var whatBobSays = GLOBAL;
 
 //起動時に呼ばれる
 window.onload= function(){
@@ -19,50 +19,56 @@ window.onload= function(){
 
 //talkIDに応じてBobの発する言葉を決める関数
 function bob(){
-    const  whatBobSays =LOCAL_BOB;
+    const whatBobSays = LOCAL_BOB;
+    const whatBobSays1 = whatBobSays;
     for(let talkID=0; talkID<=5; talkID++){
 
         const  whatBobSays = LOCAL_FOR; //ローカル変数(定数)
 
         switch(talkID){
-            case 0: //itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
-            let whatBobSays = GLOBAL;
-            whatBobSays = LOCAL_SWITCH;
-            setDialog(whatBobSays,talkID);
-            break;
-
-            case 1: //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
-            let whatBobSays1 = LOCAL_BOB;// for文の外のスコープで代入をすると要件を満たします
-            setDialog(whatBobSays1,talkID);
-            break;
-
-            case 2: //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
-            let whatBobSays2 =GLOBAL;//スコープの範囲を1階層飛び越えて取得する方法を使います
-            setDialog(whatBobSays2,talkID);
-            console.log();
-            break;
-
-            case 3://関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
-            let funcWhatBobSays = function(){
-                let whatBobSays3 =LOCAL_NEST_FUNCTION;
-                return whatBobSays3;
+            case 0: {//itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
+                let whatBobSays = GLOBAL;
+                whatBobSays = LOCAL_SWITCH;
+                setDialog(whatBobSays,talkID);
             }
-            setDialog(funcWhatBobSays(),talkID);
             break;
 
-            case 4: //関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
-            let whatBobSays4 =LOCAL_FOR;// 代入も、thisも何も使わずに取得できるwhatBobSaysの値を見てみましょう
-            setDialog(whatBobSays4,talkID);
+            case 1: {//ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
+            // for文の外のスコープで代入をすると要件を満たします
+                setDialog(whatBobSays1,talkID);
+            }
             break;
 
-            default: //オブジェクトを作成し、ID5の文字列を返すオブジェクトメソッド`whatBobSays`を使用する
-            let obj ={
-                func: function() {
-                    let whatBobSays5 = LOCAL_OBJ;
-                    return whatBobSays5;
+            case 2: {//ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
+            //スコープの範囲を1階層飛び越えて取得する方法を使います
+                setDialog(this.whatBobSays,talkID);
+            }
+            break;
+
+            case 3: {//関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
+                let funcWhatBobSays = function(){
+                    let whatBobSays3 =LOCAL_NEST_FUNCTION;
+                    return whatBobSays3;
                 }
-            };
-            setDialog(obj.func(),talkID);
+                setDialog(funcWhatBobSays(),talkID);
+            }
+            break;
+
+            case 4: {//関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
+                // 代入も、thisも何も使わずに取得できるwhatBobSaysの値を見てみましょう
+                setDialog(whatBobSays,talkID);
+            }
+            break;
+
+            default: {//オブジェクトを作成し、ID5の文字列を返すオブジェクトメソッド`whatBobSays`を使用する
+                let obj ={
+                    func: function() {
+                        let whatBobSays5 = LOCAL_OBJ;
+                        return whatBobSays5;
+                    }
+                };
+                setDialog(obj.func(),talkID);
+            }
             break;
         }
     }
